@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+#TODO: figure out why I need this here and in bootstrap.yml
+spring:
+  application:
+    name: hello
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp    
+
+  kafka:
+    consumer:
+      bootstrap-servers: kafka-1:9092,kafka-2:9092,kafka-3:9092
+      group-id: hello-group
+      auto-offset-reset: latest
+    producer:
+      bootstrap-servers: kafka-1:9092,kafka-2:9092,kafka-3:9092
+        
+kafka:
+  topic: hellotopic
+    
+ribbon:
+  ServerListRefreshInterval: 1000
+
+endpoints:
+  health:
+    sensitive: false
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
