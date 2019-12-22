@@ -1,7 +1,5 @@
 ## Spring Boot - WebSocket - Kafka @Kubernetes Messaging Demo
 
-![App Screenshot](login.png)
-
 ![App Screenshot](messaging.png)
 
 ## Requirements
