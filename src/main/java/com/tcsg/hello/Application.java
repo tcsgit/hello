@@ -3,6 +3,8 @@ package com.tcsg.hello;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class Application {
 	
+	private static final Logger logger = LoggerFactory.getLogger(Application.class);
+	
 	@RequestMapping("/")
 	public String home(Model model) {
 		
@@ -20,7 +24,7 @@ public class Application {
 		try {
 			podName = InetAddress.getLocalHost().toString();
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
+			logger.error("Local host name could not be resolved.");
 		}
 		model.addAttribute("podName", podName);
 		return "hello";
