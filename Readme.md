@@ -47,4 +47,4 @@ mvnw dockerfile:build
 kubectl apply -f k8s-hello-deployment-version.yaml
 ```
 
-Optionally, you can use Jenkinsfile s to create CI/CD pipeline for OnPrem Kubernetes and GCP GKE
+Optionally, you can use Jenkinsfile s to create CI/CD pipeline for OnPrem Kubernetes or Google GKE
