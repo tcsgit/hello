@@ -1,0 +1,28 @@
+node {  
+    
+	//checkout scm
+
+	def home = "/dev/hello"
+		
+   	def pom = readMavenPom file: "${home}/pom.xml"
+   	version = pom.version
+   
+	stage('Build') { 
+		sh "cd ${home} && mvnw package"
+    }
+    
+	stage('Dockerize') { 
+		sh "cd ${home} && docker build -t gcr.io/${PROJECT_ID}/hello:${version} ."	
+	}
+
+	stage('Push') { 
+		sh "cd ${home} && docker push gcr.io/${PROJECT_ID}/hello:${version} ."	
+	}
+    
+	stage('Deploy') { 
+		sh "cd $(home) && sed s#PROJECT_ID#$PROJECT_ID#g k8s-hello-deployment-gcp.yaml > k8s-hello-deployment-version-gcp.yaml
+		sh "cd $(home) %% sed s#IMAGE_TAG#${version}#g k8s-hello-deployment-version-gcp.yaml > k8s-hello-deployment-version-gcp.yaml"
+		
+		sh "cd ${home} && kubectl apply -f k8s-hello-deployment-version-gcp.yaml"
+	}
+}
