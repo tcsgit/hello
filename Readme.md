@@ -19,7 +19,7 @@
 **1. Clone the repository**
 
 ```bash
-git clone https://tcsgitreader:hrdr9092@github.com/tcsgit/hello.git
+git clone https://github.com/tcsgit/hello.git
 ```
 
 **2. Deploy Kafka cluster on kubernetes using kubectl**
