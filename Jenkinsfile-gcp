@@ -16,7 +16,7 @@ node {
 	}
 
 	stage('Push') { 
-		sh "cd ${home} && docker push gcr.io/${PROJECT_ID}/hello:${version} ."	
+		sh "cd ${home} && docker push gcr.io/${PROJECT_ID}/hello:${version}"	
 	}
     
 	stage('Deploy') { 
