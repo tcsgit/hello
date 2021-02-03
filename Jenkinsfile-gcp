@@ -21,7 +21,7 @@ node {
 	}
     
 	stage('Deploy') { 
-		sh "cd $(home) && sed s#PROJECT_ID#${project_id}#g k8s-hello-deployment-gcp.yaml > k8s-hello-deployment-version-gcp.yaml
+		sh "cd $(home) && sed s#PROJECT_ID#${project_id}#g k8s-hello-deployment-gcp.yaml > k8s-hello-deployment-version-gcp.yaml"
 		sh "cd $(home) %% sed s#IMAGE_TAG#${version}#g k8s-hello-deployment-version-gcp.yaml > k8s-hello-deployment-version-gcp.yaml"
 		
 		sh "cd ${home} && kubectl apply -f k8s-hello-deployment-version-gcp.yaml"
