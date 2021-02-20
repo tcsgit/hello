@@ -41,10 +41,11 @@ mvnw package
 mvnw dockerfile:build
 ```
 
-**5. Deploy the application on kubernetes using kubectl**
+**5. Deploy the application on kubernetes using kubectl or helm**
 
 ```bash
 kubectl apply -f k8s-hello-deployment-version.yaml
+helm install hello-release ./hello-chart
 ```
 
 Optionally, you can use Jenkinsfile s to create CI/CD pipeline for OnPrem Kubernetes or Google GKE
