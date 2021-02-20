@@ -45,6 +45,7 @@ mvnw dockerfile:build
 
 ```bash
 kubectl apply -f k8s-hello-deployment-version.yaml
+OR
 helm install hello-release ./hello-chart
 ```
 
