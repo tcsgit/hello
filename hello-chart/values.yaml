@@ -1,0 +1,19 @@
+# Default values for hello-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 3
+
+image:
+  name: hello
+  repository: tcsg/hello
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "1.0"
+  port: 8080
+
+service:
+  name: hello
+  type: LoadBalancer
+  targetPort: 8080
+  port: 80
