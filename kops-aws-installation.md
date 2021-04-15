@@ -9,7 +9,7 @@ An EC2 instance as command center for cli operations
 **1. Install kubectl and KOPS cli**
 
 ```bash
-curl -LO https://storage.gooapis.com/kubernetes-release/release/v1.15.2/bin/linEC2 instance as command center for cli operationsux/amd64/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.2/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 
@@ -64,4 +64,10 @@ ssh-keygen -f .ssh/id_rsa
 
 ```bash
 kops create cluster --zones=us-east-2b --master-size="t2.micro" --node-size="t2.micro" --node-count="3" --master-count=1 --kubernetes-version=1.15.12 ${NAME}
+```
+
+**9. Cleanup**
+
+```bash
+kops delete cluster --name=hello.k8s.local --state s3://hello-kops-state --yes
 ```
