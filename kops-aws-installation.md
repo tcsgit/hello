@@ -2,14 +2,14 @@
 
 ## Requirements
 
-EC2 instance as for cli operations
+EC2 instance as command center for cli operations
 
 ## Installation Steps
 
 **1. Install kubectl and KOPS cli**
 
 ```bash
-curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.2/bin/linux/amd64/kubectl
+curl -LO https://storage.gooapis.com/kubernetes-release/release/v1.15.2/bin/linEC2 instance as command center for cli operationsux/amd64/kubectl
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 
