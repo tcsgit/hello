@@ -20,11 +20,13 @@ sudo mv kops-linux-amd64 /usr/local/bin/kops
 
 **2. Create an IAM role for the KOPS user with following  policies**
 
+```bash
 AmazonEC2FullAccess
 AmazonRoute53FullAccess
 AmazonS3FullAccess
 IAMFullAccess
 AmazonVPCFullAccess
+```
 
 **3. Configure AWS Cli for the KOPS user credentials**
 
