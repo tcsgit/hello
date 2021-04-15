@@ -1,0 +1,32 @@
+node {  
+    
+	//checkout scm
+
+	def home = "/dev/hello"
+	def account_id = "AWS_ACCOUNT_ID"
+	def region = "AWS_REGION"
+		
+   	def pom = readMavenPom file: "${home}/pom.xml"
+  	version = pom.version
+   
+	stage('Build') { 
+		sh "cd ${home} && mvnw package"
+	}
+    
+	stage('Dockerize') { 
+ 		sh "cd ${home} && docker build -t ${account_id}.dkr.ecr.${region}.amazonaws.com/hello:${version} ."
+	}
+
+	stage('Push') { 
+		sh "aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${region}.amazonaws.com"
+		sh "docker push ${account_id}.dkr.ecr.${region}.amazonaws.com/hello:${version}"
+	}
+    
+	stage('Deploy') { 
+		sh "cd ${home} && sed s#ACCOUNT_ID#${account_id}#g k8s-hello-deployment-aws.yaml > k8s-hello-deployment-version-aws.yaml"
+		sh "cd ${home} && sed -i s#REGION#${region}#g k8s-hello-deployment-version-aws.yaml"
+		sh "cd ${home} && sed -i s#IMAGE_TAG#${version}#g k8s-hello-deployment-version-aws.yaml"
+		
+		sh "cd ${home} && kubectl apply -f k8s-hello-deployment-version-aws.yaml"
+	}
+}

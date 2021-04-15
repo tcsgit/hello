@@ -1,0 +1,66 @@
+# --------------------- Hello Ingress -------------------- #
+#apiVersion: extensions/v1beta1
+#kind: Ingress
+#metadata:
+#  name: hello
+#  annotations:
+#    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+#    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600" 
+#spec:
+#  backend:
+#    serviceName: hello
+#    servicePort: 8080
+
+---
+# -------------------- Hello Service --------------------- #
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: hello
+
+---
+# ------------------- Hello Deployment ------------------- #
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  minReadySeconds: 5
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+      - name: hello
+        image: ACCOUNT_ID.dkr.ecr.REGION.amazonaws.com/hello:IMAGE_TAG
+        #imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1        
+
