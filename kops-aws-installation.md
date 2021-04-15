@@ -2,7 +2,7 @@
 
 ## Requirements
 
-EC2 instance as command center for cli operations
+An EC2 instance as command center for cli operations
 
 ## Installation Steps
 
