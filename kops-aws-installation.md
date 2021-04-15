@@ -54,7 +54,7 @@ export NAME=hello.k8s.local
 export KOPS_STATE_STORE=s3://hello-kops-state
 ```
 
-**7. Generate ssh key for cluster ssh access operations**
+**7. Generate ssh key for the cluster access operations**
 
 ```bash
 ssh-keygen -f .ssh/id_rsa
