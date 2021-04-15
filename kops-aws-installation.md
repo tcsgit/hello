@@ -28,7 +28,7 @@ IAMFullAccess
 AmazonVPCFullAccess
 ```
 
-**3. Configure AWS Cli for the KOPS user credentials**
+**3. Configure AWS Cli for the KOPS user credentials (Access Key ID & Secret Access Key)**
 
 ```bash
 aws configure
