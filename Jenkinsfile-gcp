@@ -18,7 +18,7 @@ node {
 
 	stage('Push') { 
 		sh "gcloud auth configure-docker -q"
-		sh "cd ${home} && docker push gcr.io/${project_id}/hello:${version}"	
+		sh "docker push gcr.io/${project_id}/hello:${version}"	
 	}
     
 	stage('Deploy') { 
